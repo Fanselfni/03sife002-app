@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm mb-4">
             <div class="container">
-                <a href="https://www.instagram.com/ilfan.es/" class="navbar-brand fw-bold text-white">UNPAM - Profile Mahasiswa</a>
+                <a href="#" class="navbar-brand fw-bold text-white">UNPAM - Profile Mahasiswa</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -11,6 +11,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{url('/profile')}}" class="nav-link">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('/project')}}" class="nav-link">Project</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{url('/about')}}" class="nav-link">About</a>
