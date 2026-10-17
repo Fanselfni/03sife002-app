@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-<div class="container flex-grow-1">
+<div class="container flex-grow-1 d-flex flex-column justify-content-center">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <h1> Selamat Datang</h1>
