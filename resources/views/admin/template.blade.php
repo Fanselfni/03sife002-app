@@ -1,81 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.css">
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: 200px;
+            background-color: #343a40;
+            min-height: 100vh;
+            top: 56px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            padding: 10px 15px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .content {
+            margin-top: 70px;
+            margin-left: 250px; /* Adjust based on sidebar width */
+            padding: 20px;
+        }
+
+        .card {
+            border-radius: 10px;
+            border: 0;
+        }
+
+
+    </style> 
 </head>
-<style>
-body {
-    background-color: #f8f9fa;
-}
-
-.admin-sidebar {
-    width: 250px;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    padding: 20px 0;
-    background-color: #212529;
-    color: #fff;
-}
-
-.admin-sidebar .nav-link {
-    color: #fff;
-    padding: 10px 20px;
-    font-weight: 500;
-}
-
-.admin-sidebar .nav-link:hover {
-    background-color: #495057;
-    color: #fff;
-}
-
-.admin-content {
-    margin-left: 250px;
-    padding: 30px;
-}
-
-@media (max-width: 768px) {
-    .admin-sidebar {
-        width: 100%;
-        position: relative;
-        height: auto;
-    }
-
-    .admin-content {
-        margin-left: 0;
-    }
-}
-</style>
-
 <body>
-    <div class="admin-sidebar shadow">
-        <h4 class="text-center fw-bold text-white pb-3 border-bottom border-secondary">Admin Panel</h4>
-        <ul class="nav flex-column mt-3">
-            <li class="nav-item mb-1">
-                <a href="{{ route('admin.home') }}" class="nav-link">Dashboard</a>
-            </li>
-            <li class="nav-item mb-1">
-                <a href="#" class="nav-link">Project</a>
-            </li>
-        </ul>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning fixed-top shadow-sm px-3">
+        <!-- <div class="container"> -->
+            <a href="{{ route('admin.dashboard') }}" class="navbar-brand fw-bold text-white">
+                <img src="{{ asset('images/logo.png')}}" alt="Logo" height="45">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="{{ url('/') }}" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        <!-- </div> -->  
+    </nav>
+    <div class="sidebar shadow-sm">
+        <h5 class="text-center text-white py-3">Admin Menu</h5>
+        <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+        <a href="{{ route('admin.projects.index')}}">Data Project</a>
     </div>
-    <div class="admin-content">
-        <div
-            class="d-flex justify-content-between align-items-center pb-3 mb-4 border-bottom bg-white p-3 rounded shadow-sm">
-            <h3 class="fw-bold mb-0">Dashboard</h3>
-            <span class="text-muted fw-semibold">Halo, Administrator</span>
+
+    <div class="content p-3 d-flex flex-column">
+        <div class="flex-grow-1">
+            @yield('content')
         </div>
-        @yield('content')
     </div>
-    @stack('scripts')
+
+    <!-- footer -->
+    <footer class="bg-white text-dark text-center border-top py-3 mt-5">
+        <p class="mb-0">&copy; {{ date('y')}} UNPAM, All right reserved.</p>
+    </footer>
+
+    <!-- 1. WAJIB ADA: CDN jQuery (Harus di atas DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <!-- 2. Bootstrap Bundle JS -->
+    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- 3. WAJIB ADA: CDN JS DataTables -->
+    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script>
+
+    <!-- Tempat script turunan dari file view lain (seperti index.blade.php) -->
+    @yield('script')
 </body>
-
-
 </html>
