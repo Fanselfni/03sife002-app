@@ -35,7 +35,7 @@ class ProjectSeeder extends Seeder
                 'description' => 'Membuat design cover',
                 'teknologi' => 'Figma, Adobe Illustrator',
                 'image' => 'project3.jpg',
-                'status' => 'Work In Progress',
+                'status' => 'In Progress',
             ],
             [
                 'title' => 'Database Akademik',

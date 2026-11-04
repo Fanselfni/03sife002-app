@@ -29,5 +29,8 @@
         </div>
         @endforeach
     </div>
+    <div class="mt-4 justify-content-center d-flex">
+                    {{ $projects->links() }}
+                </div>
 </div>
 @endsection

@@ -6,7 +6,6 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.css">
-    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <style>
         body {
             background-color: #f8f9fa;
@@ -41,59 +40,71 @@
             border-radius: 10px;
             border: 0;
         }
-
-
     </style> 
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-warning fixed-top shadow-sm px-3">
-        <!-- <div class="container"> -->
-            <a href="{{ route('admin.dashboard') }}" class="navbar-brand fw-bold text-white">
-                <img src="{{ asset('images/logo.png')}}" alt="Logo" height="45">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        <!-- </div> -->  
+        <a href="{{ route('admin.dashboard') }}" class="navbar-brand fw-bold text-white">
+            <img src="{{ asset('images/logo.png')}}" alt="Logo" height="45">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name}}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li class="dropdown-item-text text-muted">
+                            <small>{{ Auth::user()->email }}</small>
+                        </li>
+                        <li>
+                            <form action="{{ route('admin.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Logout</button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </nav>
+
+    <!-- Sidebar -->
     <div class="sidebar shadow-sm">
         <h5 class="text-center text-white py-3">Admin Menu</h5>
         <a href="{{ route('admin.dashboard') }}">Dashboard</a>
         <a href="{{ route('admin.projects.index')}}">Data Project</a>
     </div>
 
+    <!-- Content Area -->
     <div class="content p-3 d-flex flex-column">
         <div class="flex-grow-1">
             @yield('content')
         </div>
     </div>
 
-    <!-- footer -->
+    <!-- Footer -->
     <footer class="bg-white text-dark text-center border-top py-3 mt-5">
-        <p class="mb-0">&copy; {{ date('y')}} UNPAM, All right reserved.</p>
+        <p class="mb-0">&copy; {{ date('Y') }} UNPAM, All rights reserved.</p>
     </footer>
 
-    <!-- 1. WAJIB ADA: CDN jQuery (Harus di atas DataTables) -->
+    <!-- JavaScript Dependencies -->
+    <!-- 1. CDN jQuery (Wajib di urutan pertama untuk DataTables) -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-    <!-- 2. Bootstrap Bundle JS -->
+    <!-- 2. Bootstrap Bundle JS (Sudah termasuk Popper.js agar dropdown berfungsi normal) -->
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- 3. WAJIB ADA: CDN JS DataTables -->
+    <!-- 3. CDN JS DataTables -->
     <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script>
 
-    <!-- Tempat script turunan dari file view lain (seperti index.blade.php) -->
+    <!-- Tempat script turunan dari file view lain -->
     @yield('script')
 </body>
 </html>

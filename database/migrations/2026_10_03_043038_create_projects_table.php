@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('teknologi')->nullable();
             $table->string('image')->nullable();
-            $table->enum('status',['active','archived'])->default('active');
+            $table->enum('status',['active','archived','selesai','In Progress'])->default('active');
             $table->timestamps();
         });
     }

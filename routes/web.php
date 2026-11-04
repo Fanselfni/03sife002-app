@@ -18,8 +18,12 @@ Route::get('/about', function () {
     return view('page.about');
 });
 
+Route::get('/admin/login', [App\Http\Controllers\Auth\AdminAuthController::class, 'showLoginForm'])->name('login');
+Route::post('/admin/login', [App\Http\Controllers\Auth\AdminAuthController::class, 'login'])->name('admin.login');
+Route::post('/admin/logout', [App\Http\Controllers\Auth\AdminAuthController::class, 'logout'])->name('admin.logout');
+
 // Group Admin dengan penamaan yang konsisten
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // URL: /admin -> Name: admin.dashboard
     Route::get('/', function () {
         return view('admin.home');
