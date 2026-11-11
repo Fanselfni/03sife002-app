@@ -4,11 +4,14 @@
 <div class="main-content">
     <div class="d-flex justify-content-between mb-3 py-3">
         <h3>Data Projects</h3>
-        <a href="{{ route('admin.projects.create')}}" class="btn btn-primary">Tambah Project</a>
+        <header class="justify-content-end">
+            <a href="{{ route('admin.projects.create')}}" class="btn btn-primary">Tambah Project</a>
+            <a href="{{ route('admin.projects.pdf')}}" class="btn btn-danger" target="_blank">Cetak PDF</a>
+        </header>
     </div>
 </div>
 
-<div class="card shadow-sm">
+<div class="card shadow-sm">    
     <div class="card-body">
         <table class="table table-bordered" id="tabel_project">
             <thead>

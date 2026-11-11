@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminProjectController extends Controller
 {
@@ -120,5 +121,12 @@ class AdminProjectController extends Controller
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('success', 'Project berhasil dihapus!');
+    }
+
+    public function cetakPdf()
+    {
+        $projects = Project::all();
+        $pdf = Pdf::loadView('admin.projects.pdf', compact('projects'));
+        return $pdf->stream('projects.pdf');
     }
 }
